@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importação para navegação
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const navigate = useNavigate(); // Hook para navegação
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const newErrors: { email?: string; password?: string } = {};
@@ -27,8 +29,27 @@ function Login() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      console.log("Login realizado com sucesso!");
-      // Enviar dados para o backend
+      try {
+        const response = await fetch("http://localhost:3000/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.msg || "Erro ao fazer login");
+        }
+
+        console.log("Login realizado com sucesso!", data);
+        localStorage.setItem("token", data.token);
+
+        navigate("/dashboard"); // Redireciona para o Dashboard após login bem-sucedido
+      } catch (error: any) {
+        console.error("Erro:", error.message);
+        alert(error.message);
+      }
     }
   };
 

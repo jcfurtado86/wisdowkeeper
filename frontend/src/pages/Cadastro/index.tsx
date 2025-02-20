@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+import Sidebar from "../../components/Sidebar"
 
 const Cadastro = () => {
+
+  const [isSidebarOpen] = useState(false);
+  
+ 
+
+
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -81,12 +88,16 @@ const Cadastro = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+    <div className="min-h-screen flex  bg-gray-100">
+      {/* Sidebar */}
+      <Sidebar isSidebarOpen={isSidebarOpen} />
+
+      <div className="flex-1 flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl"
       >
-        <h1 className="text-2xl font-bold mb-6 text-center">Cadastro</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">Cadastro de Usuário</h1>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
@@ -103,8 +114,11 @@ const Cadastro = () => {
                 errors.nome ? "border-red-500" : "border-gray-300"
               }`}
             />
+            
             {errors.nome && <p className="text-red-500 text-sm">{errors.nome}</p>}
+            
           </div>
+         
 
           <div className="mb-4">
             <label className="block font-medium mb-1" htmlFor="email">
@@ -272,6 +286,7 @@ const Cadastro = () => {
           Cadastrar
         </button>
       </form>
+    </div>
     </div>
   );
 };
