@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineVideoCamera } from "react-icons/ai";
 import { FiUpload } from "react-icons/fi";
+import Sidebar from "../../components/Sidebar";
 
 const CriacaoSolucao = () => {
   const [titulo, setTitulo] = useState("");
@@ -10,6 +11,9 @@ const CriacaoSolucao = () => {
   const [video, setVideo] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+
+ 
+  const [isSidebarOpen] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, tipo: string) => {
     const file = e.target.files ? e.target.files[0] : null;
@@ -36,6 +40,9 @@ const CriacaoSolucao = () => {
   };
 
   return (
+    <div className="min-h-screen flex bg-gray-100">
+      {/* Sidebar */}
+      <Sidebar isSidebarOpen={isSidebarOpen} />
     <div className="p-6 bg-white h-full shadow-lg rounded-lg max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-4 text-center">Criar Nova Solução</h2>
       {successMessage && <p className="text-green-500 text-center mb-3">{successMessage}</p>}
@@ -82,6 +89,7 @@ const CriacaoSolucao = () => {
       >
         {loading ? "Salvando..." : "Salvar"}
       </button>
+    </div>
     </div>
   );
 };

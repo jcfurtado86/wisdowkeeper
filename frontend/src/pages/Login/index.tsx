@@ -7,7 +7,7 @@ function Login() {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const navigate = useNavigate(); // Hook para navegação
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const newErrors: { email?: string; password?: string } = {};
@@ -28,28 +28,10 @@ function Login() {
 
     setErrors(newErrors);
 
+    // Se não houver erros, redireciona para /dashboard
     if (Object.keys(newErrors).length === 0) {
-      try {
-        const response = await fetch("http://localhost:3000/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.msg || "Erro ao fazer login");
-        }
-
-        console.log("Login realizado com sucesso!", data);
-        localStorage.setItem("token", data.token);
-
-        navigate("/dashboard"); // Redireciona para o Dashboard após login bem-sucedido
-      } catch (error: any) {
-        console.error("Erro:", error.message);
-        alert(error.message);
-      }
+      console.log("Login realizado com sucesso!");
+      navigate("/dashboard"); // Redireciona para a rota /dashboard
     }
   };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Importação para navegação
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -15,34 +16,34 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
       <h2 className="text-3xl font-semibold mb-8">WisdowKeeper</h2>
       <ul className="space-y-4">
         <li>
-          <a href="#" className="hover:bg-blue-500 p-2 rounded-lg block">
+          <Link to="/dashboard" className="hover:bg-blue-500 p-2 rounded-lg block">
             Início
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:bg-blue-500 p-2 rounded-lg block">
+          <Link to="/solucoes" className="hover:bg-blue-500 p-2 rounded-lg block">
             Soluções
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:bg-blue-500 p-2 rounded-lg block">
+          <Link to="/dashboard" className="hover:bg-blue-500 p-2 rounded-lg block">
             Monitorar Consultas
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:bg-blue-500 p-2 rounded-lg block">
+          <Link to="/dashboard" className="hover:bg-blue-500 p-2 rounded-lg block">
             Categorizar Soluções
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:bg-blue-500 p-2 rounded-lg block">
+          <Link to="/usuarios" className="hover:bg-blue-500 p-2 rounded-lg block">
             Usuários
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:bg-blue-500 p-2 rounded-lg block">
+          <Link to="/dashboard" className="hover:bg-blue-500 p-2 rounded-lg block">
             Feedbacks
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
